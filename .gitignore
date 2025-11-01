@@ -1,0 +1,171 @@
+# Joplin Console Browser - GitIgnore
+# ================================
+
+# Python
+# ------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+# -----------
+*.manifest
+*.spec
+
+# Installer logs
+# --------------
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+# ----------------------------
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Virtual environments
+# --------------------
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+# ----
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+# ------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Joplin Console Browser specific
+# -------------------------------
+# Export directories created by the tool
+joplin_export*/
+exp*/
+test_export*/
+test_export_no_metadata*/
+test_export_with_metadata*/
+
+# Temporary files
+# ---------------
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# History files
+# -------------
+.joplin_history
+
+# Database files (user-specific)
+# ------------------------------
+*.db
+*.sqlite
+*.sqlite3
+
+# Log files
+# ---------
+*.log
+logs/
+
+# Configuration files that might contain sensitive data
+# -----------------------------------------------------
+config.json
+secrets.json
+.env.local
+.env.production
+
+# Backup files
+# ------------
+*.backup
+backups/
+
+# Runtime files
+# -------------
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage reports
+# ----------------
+*.cover
+.coverage
+coverage.xml
+htmlcov/
+
+# Jupyter Notebook
+# ----------------
+.ipynb_checkpoints
+
+# pyenv
+# -----
+.python-version
+
+# pipenv
+# ------
+Pipfile.lock
+
+# Celery
+# ------
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+# ---------------------
+*.sage.py
+
+# Environments
+# ------------
+.env
+.conda/
+.conda-env/
+
+# mypy
+# ----
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+# -----------------
+.pyre/

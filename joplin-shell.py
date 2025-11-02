@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-joplin-console.py
-Interactive console browser for a Joplin database.sqlite file.
+joplin-shell.py
+Interactive shell for a Joplin database.sqlite file.
 """
 
 import os
@@ -499,10 +499,10 @@ def export_notebook_recursive(db: JoplinDB, folder: sqlite3.Row, out_dir: Path, 
         export_notebook_recursive(db, sub, folder_dir, format_type, include_metadata)
 
 # ----------------------------------------------------------------------
-# Interactive browser
+# Interactive shell
 # ----------------------------------------------------------------------
-def interactive_browser(db: JoplinDB, export_root: Optional[Path] = None, export_format: str = "md", include_metadata: bool = False):
-    print("\n=== Joplin Console Browser ===")
+def interactive_shell(db: JoplinDB, export_root: Optional[Path] = None, export_format: str = "md", include_metadata: bool = False):
+    print("\n=== Joplin Shell ===")
     print("Browse, search, and export your Joplin notes.\n")
     print("Commands:")
     print("  l                 - List folders/notes at current location")
@@ -957,7 +957,7 @@ def interactive_browser(db: JoplinDB, export_root: Optional[Path] = None, export
         # Help command
         # ------------------------------------------------------------------
         if action in {"h", "help", "?"}:
-            print("\n=== Joplin Console Browser ===")
+            print("\n=== Joplin Shell ===")
             print("Browse, search, and export your Joplin notes.\n")
             print("Commands:")
             print("  l                 - List folders/notes at current location")
@@ -999,7 +999,7 @@ WRITE_MODE = False
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Interactive console browser for Joplin's database.sqlite"
+        description="Interactive console shell for Joplin's database.sqlite"
     )
     parser.add_argument(
         "db",
@@ -1091,7 +1091,7 @@ def main():
             return
             
         # Interactive mode (existing functionality)
-        interactive_browser(db, export_root=args.export_dir, export_format=args.export_format, include_metadata=args.include_metadata)
+        interactive_shell(db, export_root=args.export_dir, export_format=args.export_format, include_metadata=args.include_metadata)
     finally:
         db.close()
 

@@ -1,4 +1,4 @@
-# Joplin Console Browser
+# Joplin Shell
 
 An interactive command-line browser for Joplin database files, providing a powerful terminal-based interface to browse, search, view, edit, and export your Joplin notes.
 
@@ -26,10 +26,10 @@ An interactive command-line browser for Joplin database files, providing a power
 
 ### Setup
 
-1. Download or clone the `joplin-console.py` script
+1. Download or clone the `joplin-shell.py` script
 2. Make it executable:
    ```bash
-   chmod +x joplin-console.py
+   chmod +x joplin-shell.py
    ```
 
 ## Usage
@@ -39,13 +39,13 @@ An interactive command-line browser for Joplin database files, providing a power
 Launch the browser (it will auto-detect your Joplin database):
 
 ```bash
-python3 joplin-console.py
+python3 joplin-shell.py
 ```
 
 Or specify a database path explicitly:
 
 ```bash
-python3 joplin-console.py /path/to/your/database.sqlite
+python3 joplin-shell.py /path/to/your/database.sqlite
 ```
 
 ### Command-Line Options
@@ -60,19 +60,19 @@ Example with options:
 
 ```bash
 # Direct export all notebooks as Markdown files with metadata (no interactive mode)
-python3 joplin-console.py --export-dir ./my_markdown_exports --export-format md --export-all --include-metadata
+python3 joplin-shell.py --export-dir ./my_markdown_exports --export-format md --export-all --include-metadata
 
 # Direct export all notebooks as plain text files without metadata (default)
-python3 joplin-console.py --export-dir ./my_text_exports --export-format txt --export-all
+python3 joplin-shell.py --export-dir ./my_text_exports --export-format txt --export-all
 
 # Export with metadata disabled (default behavior)
-python3 joplin-console.py --export-dir ./my_exports --export-format md --include-metadata
+python3 joplin-shell.py --export-dir ./my_exports --export-format md --include-metadata
 
 # Interactive mode with metadata disabled (default)
-python3 joplin-console.py --export-format txt --export-dir ./my_exports
+python3 joplin-shell.py --export-format txt --export-dir ./my_exports
 
 # Enable write mode for interactive editing
-python3 joplin-console.py --export-dir ./my_exports --write
+python3 joplin-shell.py --export-dir ./my_exports --write
 ```
 
 ### Interactive Commands
@@ -229,13 +229,13 @@ For quick, non-interactive export of all your notebooks, use the `--export-all` 
 
 ```bash
 # Export everything as Markdown without metadata (default, content-only)
-python3 joplin-console.py --export-all --export-dir ./markdown_export
+python3 joplin-shell.py --export-all --export-dir ./markdown_export
 
 # Export everything as Markdown with full metadata
-python3 joplin-console.py --export-all --export-format md --export-dir ./markdown_with_metadata --include-metadata
+python3 joplin-shell.py --export-all --export-format md --export-dir ./markdown_with_metadata --include-metadata
 
 # Export everything as plain text with metadata
-python3 joplin-console.py --export-all --export-format txt --export-dir ./text_with_metadata --include-metadata
+python3 joplin-shell.py --export-all --export-format txt --export-dir ./text_with_metadata --include-metadata
 ```
 
 This will:
@@ -259,7 +259,7 @@ Perfect for:
 By default, the browser runs in read-only mode for safety. Use the `--write` flag to enable write mode:
 
 ```bash
-python3 joplin-console.py --write
+python3 joplin-shell.py --write
 ```
 
 In write mode:
@@ -292,7 +292,7 @@ The browser includes robust error handling:
 ### Database Not Found
 If auto-detection fails, provide the database path explicitly:
 ```bash
-python3 joplin-console.py /full/path/to/database.sqlite
+python3 joplin-shell.py /full/path/to/database.sqlite
 ```
 
 ### Vim Not Available

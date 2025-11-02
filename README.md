@@ -59,6 +59,12 @@ python3 joplin-shell.py /path/to/your/database.sqlite
 Example with options:
 
 ```bash
+# Interactive mode (default)
+python3 joplin-shell.py
+
+# Enable write mode for interactive editing
+python3 joplin-shell.py --write
+
 # Direct export all notebooks as Markdown files with metadata (no interactive mode)
 python3 joplin-shell.py --export-dir ./my_markdown_exports --export-format md --export-all --include-metadata
 
@@ -67,12 +73,6 @@ python3 joplin-shell.py --export-dir ./my_text_exports --export-format txt --exp
 
 # Export with metadata disabled (default behavior)
 python3 joplin-shell.py --export-dir ./my_exports --export-format md --include-metadata
-
-# Interactive mode (default)
-python3 joplin-shell.py
-
-# Enable write mode for interactive editing
-python3 joplin-shell.py --write
 ```
 
 ### Interactive Commands

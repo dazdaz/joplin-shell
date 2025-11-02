@@ -13,7 +13,7 @@ An interactive command-line browser for Joplin database files, providing a power
 - 🏗️ **Organized Notebook Structure**: Automatic creation of folders for each subnotebook during export
 - ⌨️ **Arrow Key Support**: Navigate command history with UP/DOWN arrows
 - 💾 **Read/Write Modes**: Choose between read-only or edit-enabled modes
-- 🎯 **Case-Insensitive Navigation**: Navigate to notebooks using any case combination (5D33432D or 5d33432d)
+- 🎯 **Case-Insensitive Navigation**: Navigate to notebooks using any case combination
 - 📊 **Enhanced Visual Display**: Emoji icons distinguish item types: 📁 root notebooks, 📂 subnotebooks, 📄 notes for better visual clarity
 
 ## Installation

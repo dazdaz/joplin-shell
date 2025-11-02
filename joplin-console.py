@@ -281,9 +281,10 @@ class JoplinDB:
     def search_notes(self, term: str) -> List[sqlite3.Row]:
         """Simple full-text search using the built-in FTS table."""
         sql = """
-            SELECT n.*
-            FROM notes_fts f
-            JOIN notes n ON f.rowid = n.rowid
+            SELECT n.*, f.parent_id
+            FROM notes_fts ft
+            JOIN notes n ON ft.rowid = n.rowid
+            LEFT JOIN folders f ON n.parent_id = f.id
             WHERE notes_fts MATCH ?
             LIMIT 50
         """
@@ -470,7 +471,9 @@ def interactive_browser(db: JoplinDB, export_root: Optional[Path] = None, export
     print("  cd /              - Go back to root level")
     print("  s <search-term>   - Search all notes (full-text search)")
     print("  n <note-id>       - View full note content")
+    print("  n <notebook-id>/<note-id> - View note with notebook context")
     print("  cat <note-id>     - View note content (no metadata)")
+    print("  cat <notebook-id>/<note-id> - View note content with notebook context")
     print("  vim <note-id>     - Open note in Vim editor")
     print(f"  e [note-id]       - Export to {export_format.upper()} (current folder or single note)")
     print("  q                 - Quit")
@@ -589,6 +592,36 @@ def interactive_browser(db: JoplinDB, export_root: Optional[Path] = None, export
         # Helper function to find note by ID (with folder context)
         # ------------------------------------------------------------------
         def find_note_in_context(note_id: str) -> Optional[sqlite3.Row]:
+            # Handle path format: notebook-id/note-id
+            if '/' in note_id:
+                notebook_id, note_id = note_id.split('/', 1)
+                
+                # First try to find the notebook
+                notebook = db.get_note(notebook_id)  # This will return None since notebook_id is a folder ID
+                # Get folder directly
+                folders = db.get_folders()
+                notebook_folder = next((f for f in folders if f["id"].startswith(notebook_id)), None)
+                
+                if not notebook_folder:
+                    print(f"Notebook {notebook_id[:8]} not found.")
+                    return None
+                
+                # Now look for the note in that specific notebook
+                notes_in_notebook = db.get_notes_in_folder(notebook_folder["id"])
+                matching_notes = [n for n in notes_in_notebook if n["id"].startswith(note_id)]
+                
+                if len(matching_notes) == 1:
+                    return matching_notes[0]
+                elif len(matching_notes) > 1:
+                    print("Ambiguous note ID - multiple notes match:")
+                    for n in matching_notes:
+                        print(f"  [{n['id'][:8]}] {n['title']}")
+                    return None
+                else:
+                    print(f"Note {note_id[:8]} not found in notebook {notebook_folder['title']}.")
+                    return None
+            
+            # Standard behavior (no path format)
             # First try to get note globally (full ID)
             note = db.get_note(note_id)
             
@@ -765,8 +798,20 @@ def interactive_browser(db: JoplinDB, export_root: Optional[Path] = None, export
                 continue
                 
             print(f"\nSearch results for '{arg}' ({len(results)} hits):")
-            for n in results:
-                print(f"  [{n['id'][:8]}] {n['title']}")
+            for result in results:
+                # Access results as sqlite3.Row objects
+                note_id = result['id']
+                note_title = result['title']
+                parent_id = result.get('parent_id', '') if 'parent_id' in result.keys() else ''
+                
+                # Show notebook context if available
+                notebook_path = ""
+                if parent_id and parent_id != "":
+                    # Get the notebook ID for context
+                    notebook_path = f"{parent_id[:8]}/"
+                print(f"  [{notebook_path}{note_id[:8]}] {note_title}")
+            print()
+            print("💡 Tip: Use the full path format (notebook-id/note-id) with n, cat, or vim commands!")
             print()
             continue
 

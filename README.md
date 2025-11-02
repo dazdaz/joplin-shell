@@ -85,7 +85,9 @@ Once in the interactive browser, use these commands:
 
 #### Viewing Notes
 - `n <note-id>` - View note with full metadata (timestamps, tags, attachments)
+- `n <notebook-id>/<note-id>` - View note with notebook context
 - `cat <note-id>` - View note content only (no metadata)
+- `cat <notebook-id>/<note-id>` - View note content with notebook context
 - `s <search-term>` - Search all notes (full-text search)
 - `e <note-id>` - Export note with attachments to specified directory
 - `e` - Export current folder with all attachments
@@ -100,6 +102,14 @@ Once in the interactive browser, use these commands:
 - `e <note-id>` - Export single note as file in the chosen format
 
 **Note**: Export commands automatically extract and save any file attachments (images, PDFs, documents, etc.) to an `attachments` subdirectory within each export folder. Attachments are organized by note and maintain their original filenames.
+
+### Path Format Support
+You can reference notes using notebook context with the format `notebook-id/note-id`:
+- `n 38292a07/38292a03` - View note `38292a03` from notebook `38292a07`
+- `cat 38292a07/38292a03` - View note content with notebook context
+- `vim 38292a07/38292a03` - Edit note with notebook context
+
+This is especially useful when search results show `[38292a07/38292a03] My Note Title` format.
 
 #### Help
 - `h`, `help`, or `?` - Show help message
